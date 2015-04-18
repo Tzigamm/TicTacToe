@@ -1,7 +1,6 @@
 package pack_Main;
 
 //import pack_Main.JImageViewer;
-//Test pour Git
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -32,7 +31,7 @@ public class Main extends JFrame implements ActionListener
 	PartieEnCours partie = new PartieEnCours(0); //Défini la partie, pour changer le nb de cases, changer le nb en parenthèse
 	BoutonCase[][] tableauBoutons; //Ma matrice de bouton
 	int tableauEtatGrille[][]; //Etat, selon la position du bouton, même coordonnées: Quand 1ère utilisation, pas de valeur définie, après reset, tout a 0. 1 pour cercle, 2 pour croix
-	FenetreLogs logs = new FenetreLogs();
+	FenetreLogs logs = new FenetreLogs(); //Définie la fenetre de logs !
 	
 	public static void main(String[] args) //creer ma fenetre de base, ne pas trop toucher, sinon ça plante
 	{
