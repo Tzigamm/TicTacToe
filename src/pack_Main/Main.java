@@ -63,7 +63,7 @@ public class Main extends JFrame implements ActionListener
 		setTitle("Tic Tac Toe");
 		
 	    int taille = Integer.parseInt(JOptionPane.showInputDialog(null, "Indiquer le nombre de cases que fait votre grille !", "Initialisation", JOptionPane.QUESTION_MESSAGE));
-	    if(taille > 1)
+	    if(taille > 2)
 	    	partie.setTaille(taille);
 	    else
 	    {
@@ -298,8 +298,11 @@ public class Main extends JFrame implements ActionListener
 					}
 				}
 			}
+			IA();
 		}
 	}
+	
+	
 	
 	void creationBouton(int largeurPanel, int hauteurPanel)
 	{
@@ -388,10 +391,8 @@ public class Main extends JFrame implements ActionListener
 					if(tableauEtatGrille[colonne][ligne] == joueur)
 					{
 						scoreLigne ++;
-						//System.out.println("joueur : " + joueur + "scoreLigne : " + scoreLigne);
 						if(scoreLigne == partie.getTaille())
 						{
-							//System.out.println("joueur " + joueur + " à gagné");
 							victoire = joueur;
 						}
 					}
@@ -404,7 +405,6 @@ public class Main extends JFrame implements ActionListener
 				if(tableauEtatGrille[colonne][ligne] == joueur)
 				{
 					scoreLigne ++;
-					//System.out.println("joueur : " + joueur + "scoreLigne : " + scoreLigne);
 					if(scoreLigne == partie.getTaille())
 					{
 						System.out.println("joueur " + joueur + " à gagné");
@@ -419,7 +419,6 @@ public class Main extends JFrame implements ActionListener
 				if(tableauEtatGrille[colonne][ligne] == joueur)
 				{
 					scoreLigne ++;
-					//System.out.println("joueur : " + joueur + "scoreLigne : " + scoreLigne);
 					if(scoreLigne == partie.getTaille())
 					{
 						System.out.println("joueur " + joueur + " à gagné");
@@ -441,5 +440,57 @@ public class Main extends JFrame implements ActionListener
 		}
 			
 		return victoire;
+	}
+	
+	int IA()
+	{
+		int grilleSauvegarde[][] = tableauEtatGrille;
+		int i = 0;
+		int j = 0;
+		int branchesDeProbabilite[][] = new int[partie.getTaille()*partie.getTaille()*partie.getTaille()][partie.getTaille()*partie.getTaille()*partie.getTaille()] ;
+		int a = 0;
+		int b = 0;
+		int ligne = 0;
+		int colonne = 0;
+		
+		for(ligne = 0 ; ligne < partie.getTaille() ; ligne++)
+		{
+			for(colonne = 0 ; colonne < partie.getTaille() ; colonne++)//on parcour le tableau pour trouver les cases vides
+			{
+				if(tableauEtatGrille[colonne][ligne] == 0)
+				{
+					branchesDeProbabilite[a][b+1] = colonne;
+					branchesDeProbabilite[a][b+2] = ligne;
+					
+				}		
+			}
+		}	
+				
+		
+		i = branchesDeProbabilite[a][b+1] ;
+		j = branchesDeProbabilite[a][b+2] ;
+		
+		System.out.println("i : " + i + "j : " + j);
+		
+		if(partie.getTour() == true) //Si tour du joueur 1
+		{
+			tableauBoutons[i][j].setCircle();
+			tableauEtatGrille[i][j] = 1; //Met 1 dans la matrice de réponse a l'emplacement du cercle
+			partie.passerTour(); //passe le tour au joueur 1
+			
+			logs.afficherMessagePlacement(1, i, j);
+		}
+		else
+		{
+			tableauBoutons[i][j].setCross();
+			tableauEtatGrille[i][j] = 2; //Idem pour une croix: 2
+			partie.passerTour(); //passe le tour au joueur 2
+			
+			logs.afficherMessagePlacement(2, i, j);
+		}
+		
+		tableauEtatGrille = grilleSauvegarde;
+		
+		return 0;
 	}
 }
