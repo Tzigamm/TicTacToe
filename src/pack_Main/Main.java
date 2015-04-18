@@ -33,6 +33,8 @@ public class Main extends JFrame implements ActionListener
 	int tableauEtatGrille[][]; //Etat, selon la position du bouton, même coordonnées: Quand 1ère utilisation, pas de valeur définie, après reset, tout a 0. 1 pour cercle, 2 pour croix
 	FenetreLogs logs = new FenetreLogs();
 	
+	//Test commentaire
+	
 	public static void main(String[] args) //creer ma fenetre de base, ne pas trop toucher, sinon ça plante
 	{
 		EventQueue.invokeLater
