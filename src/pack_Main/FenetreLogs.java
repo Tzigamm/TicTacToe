@@ -204,12 +204,15 @@ public class FenetreLogs implements ActionListener {
 		
 	}
 	
+	public void refreshTaille()
+	{
+		window.frame.setBounds(X, Y, WIDTH, HEIGHT);
+	}
+	
 	//Fonction pour fermer la fenetre
 	
 	public void close()
 	{
 		window.frame.dispose();
-		
-		System.out.println("PASSE");
 	}
 }
